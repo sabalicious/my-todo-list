@@ -1,12 +1,13 @@
 import * as helpers from "./utils/todoHelpers";
 import { initialTodos as InitialData } from "./data/todosStructure";
 import TodoItem from "./components/TodoItem";
+import TodoForm from "./components/TodoForm";
 import { useState } from "react";
 
 function App() {
   const [todos, setTodos] = useState(InitialData);
   const handleAddTodo = (text) => {
-    console.log("add task: ", text);
+    setTodos(helpers.addTodo(todos, text));
   };
 
   const handleDeleteTodo = (id) => {
@@ -30,7 +31,12 @@ function App() {
     );
   });
 
-  return <div>{todoItems}</div>;
+  return (
+    <div>
+      <TodoForm onAdd={handleAddTodo} />
+      {todoItems}
+    </div>
+  );
 }
 
 export default App;
