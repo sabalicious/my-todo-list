@@ -2,11 +2,18 @@ import * as helpers from "./utils/todoHelpers";
 import { initialTodos as InitialData } from "./data/todosStructure";
 import TodoItem from "./components/TodoItem";
 import TodoForm from "./components/TodoForm";
+import TodoFilter from "./components/TodoFilter";
 import "./App.css";
 import { useState } from "react";
 
 function App() {
   const [todos, setTodos] = useState(InitialData);
+  const [filter, setFilter] = useState("All");
+
+  const handleFilter = (filter) => {
+    setFilter(filter);
+  };
+
   const handleAddTodo = (text) => {
     setTodos(helpers.addTodo(todos, text));
   };
@@ -19,7 +26,9 @@ function App() {
     setTodos(helpers.toggleTodo(todos, id));
   };
 
-  const todoItems = todos.map((todo) => {
+  const filteredTodos = helpers.filterTodo(todos, filter);
+
+  const todoItems = filteredTodos.map((todo) => {
     return (
       <TodoItem
         key={todo.id}
@@ -36,6 +45,7 @@ function App() {
     <div className="app">
       <h1 className="app-title">My Todo App</h1>
       <TodoForm onAdd={handleAddTodo} />
+      <TodoFilter filter={filter} onFilter={handleFilter} />
       <div className="todo-list">{todoItems}</div>
     </div>
   );

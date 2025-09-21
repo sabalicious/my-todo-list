@@ -37,3 +37,13 @@ export function updateTodoText(todos, id, newText) {
     return todo;
   });
 }
+
+export function filterTodo(todos, filter) {
+  if (filter === "All") {
+    return todos;
+  } else if (filter === "Active") {
+    return todos.filter((todo) => todo.completed === false);
+  } else if (filter === "Done") {
+    return todos.filter((todo) => todo.completed === true);
+  }
+}
