@@ -2,6 +2,7 @@ import * as helpers from "./utils/todoHelpers";
 import { initialTodos as InitialData } from "./data/todosStructure";
 import TodoItem from "./components/TodoItem";
 import TodoForm from "./components/TodoForm";
+import "./App.css";
 import { useState } from "react";
 
 function App() {
@@ -32,9 +33,10 @@ function App() {
   });
 
   return (
-    <div>
+    <div className="app">
+      <h1 className="app-title">My Todo App</h1>
       <TodoForm onAdd={handleAddTodo} />
-      {todoItems}
+      <div className="todo-list">{todoItems}</div>
     </div>
   );
 }
