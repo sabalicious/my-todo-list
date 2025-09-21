@@ -14,6 +14,10 @@ function App() {
     setFilter(filter);
   };
 
+  const handleChange = (newText, id) => {
+    setTodos(helpers.updateTodoText(todos, id, newText));
+  };
+
   const handleAddTodo = (text) => {
     setTodos(helpers.addTodo(todos, text));
   };
@@ -37,6 +41,7 @@ function App() {
         completed={todo.completed}
         onToggle={handleToggleTodo}
         onDelete={handleDeleteTodo}
+        onChange={handleChange}
       />
     );
   });
