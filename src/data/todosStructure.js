@@ -15,7 +15,7 @@ export const initialTodos = [
   },
   {
     id: nanoid(),
-    text: "Do labs",
+    text: "Have a rest",
     completed: false,
     createdAt: new Date(),
   },

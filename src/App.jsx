@@ -4,11 +4,15 @@ import TodoItem from "./components/TodoItem";
 import TodoForm from "./components/TodoForm";
 import TodoFilter from "./components/TodoFilter";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [todos, setTodos] = useState(InitialData);
-  const [filter, setFilter] = useState("All");
+  const [todos, setTodos] = useState(() => {
+    const saved = localStorage.getItem('todos');
+    return saved ? JSON.parse(saved) : InitialData;
+  });
+
+  const [filter, setFilter] = useState("All"); 
 
   const handleFilter = (filter) => {
     setFilter(filter);
@@ -43,8 +47,12 @@ function App() {
         onDelete={handleDeleteTodo}
         onChange={handleChange}
       />
-    );
+    );  
   });
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div className="app">
